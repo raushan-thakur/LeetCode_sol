@@ -1,9 +1,14 @@
 class Solution {
 public:
     int maxProduct(vector<int>& nums) {
-        sort(nums.begin(), nums.end());
-        int n = nums.size();
-        int ans = (nums[n-1] - 1)*(nums[n-2]-1);
-        return ans;
+        int res = 0;
+        int curMax = nums[0];
+
+        for (int i = 1; i < nums.size(); i++) {
+            res = max(res, (curMax - 1) * (nums[i] - 1));
+            curMax = max(curMax, nums[i]);
+        }
+
+        return res;        
     }
 };
