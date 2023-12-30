@@ -14,9 +14,7 @@ public:
         }
         
         for(int i= 0; i<26; i++){
-            if(a[i]) 
-                if((a[i] % n))
-                    return false;
+                if(a[i] % n) return false;
         }
         return true;
     }
