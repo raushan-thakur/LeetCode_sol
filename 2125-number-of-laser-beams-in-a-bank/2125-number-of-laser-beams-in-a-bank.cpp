@@ -1,24 +1,12 @@
 class Solution {
 public:
     int numberOfBeams(vector<string>& bank) {
-        int n = bank.size();
-        vector<int> laser;
-        
-        for(int i =0 ;i<n;i++){
-            int cnt = 0;
-            for(int j=0; j < bank[i].size(); j++){
-                if(bank[i][j] == '1') cnt++;
-            }
-            if(cnt)
-            laser.push_back(cnt);
-        }
-        
-        int ans = 0;
-        
-        for(int i=1; i<laser.size() ; i++){
-            int prev = laser[i-1];
-            int next = laser[i];
-            ans+= (prev*next);
+        int ans = 0, prev = 0;
+        for (int i = 0; i < bank.size(); i++) {
+            int curr = count(bank[i].begin(), bank[i].end(), '1');
+            if (curr == 0) continue;
+            ans += prev * curr;
+            prev = curr;
         }
         return ans;
     }
