@@ -1,22 +1,25 @@
 class Solution {
 public:
-    int solveTab(vector<int>& nums){
+    int space(vector<int>& nums){
         int n = nums.size();
-        vector<vector<int> > dp (n+1, vector<int> (n+1, 0));
+        
+        vector<int> c(n+1, 0);
+        vector<int> p(n+1, 0);
 
         for(int curr = n-1; curr>=0 ;curr--){
             for(int prev = curr; prev>=-1; prev--){
-                int notTake = 0 + dp[curr+1][prev+1];
+                int notTake = 0 + c[prev+1];
                 int take = 0; 
                 if(prev==-1 || nums[prev]<nums[curr]){
-                    take = 1 + dp[curr+1][curr+1];
+                    take = 1 + c[curr+1];
                 }
-                dp[curr][prev+1] = max(take, notTake);
+                p[prev+1] = max(take, notTake);
             }
+            c = p;
         }
-        return dp[0][0];
+        return c[0];
     }
     int lengthOfLIS(vector<int>& nums) {
-        return solveTab(nums);
+        return space(nums);
     }
 };
