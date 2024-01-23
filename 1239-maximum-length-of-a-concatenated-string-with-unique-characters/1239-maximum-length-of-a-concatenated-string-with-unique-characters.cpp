@@ -1,7 +1,12 @@
 class Solution {
 public:
-    int solve(int index,vector<string> &ans,vector<string> &arr){
+    int solve(int index,vector<string> &ans,vector<string> &arr,unordered_map<string,int> &dp){
         if(index>=arr.size()) return 0;
+        
+        string curr="";
+        for(auto &val:ans) curr+=val;
+        
+        if(dp.find(curr)!=dp.end()) return dp[curr];
 
         ans.push_back(arr[index]);
         unordered_map<char,int> m;
@@ -18,16 +23,17 @@ public:
         }
         
         int opt1=0,opt2=0;
-        if(flag) opt1=arr[index].size()+solve(index+1,ans,arr);
+        if(flag) opt1=arr[index].size()+solve(index+1,ans,arr,dp);
         ans.pop_back();
-        opt2=solve(index+1,ans,arr);
+        opt2=solve(index+1,ans,arr,dp);
 
-        return max(opt1,opt2);
+        return dp[curr]=max(opt1,opt2);
 
     }
     int maxLength(vector<string>& arr) {
+        unordered_map<string,int> dp;
         vector<string> ans;
         
-        return solve(0,ans,arr);
+        return solve(0,ans,arr,dp);
     }
 };
