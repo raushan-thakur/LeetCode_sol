@@ -1,9 +1,7 @@
 class Solution {
 public:
     string customSortString(string order, string s) {
-        vector<int> a(26,0);
         vector<int> b(26,0);
-        
          for(int i =0 ; i<s.size(); i++){
              b[s[i] - 'a']++;
          }
