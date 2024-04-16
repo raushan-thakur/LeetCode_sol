@@ -10,13 +10,11 @@ public:
         while(r < n){
             mp[f[r]]++;
             if(mp.size() > 2){
-                while(mp.size() > 2 ){
-                    mp[f[l]]--;
-                    if(mp[f[l]] == 0){ 
-                        mp.erase(f[l]);
-                    }
-                    l++;
+                mp[f[l]]--;
+                if(mp[f[l]] == 0){ 
+                    mp.erase(f[l]);
                 }
+                l++;                
             }
             ans = max(ans, r-l+1);
             r++;
