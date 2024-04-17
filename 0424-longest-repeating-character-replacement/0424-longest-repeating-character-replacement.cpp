@@ -3,19 +3,23 @@ public:
     int characterReplacement(string s, int k) {
         int n = s.length();
         int ans = 0;
+        vector<int> f(26,0);
+        int maxi = 0;
+        int l =0;
+        int r=0;
         
-        for(int i=0; i<n; i++){
-            int maxi = 0;
-            vector<int> f(26,0);
-            for(int j=i; j<n; j++){
-                f[s[j] - 'A']++;
-                maxi = max(maxi, f[s[j] - 'A']);
+        while(r<n){
+            f[s[r] - 'A']++;
+            maxi = max(maxi, f[s[r] - 'A']);
                 
-                if(j-i+1 - maxi <= k){
-                    ans = max(ans, j-i+1);
-                }else break;
+            if(r-l+1 - maxi > k){
+                f[s[l] -'A']--;
+                l++;
             }
+            ans = max(ans, r-l+1);
+            r++;
         }
+        
         return ans;
     }
 };
