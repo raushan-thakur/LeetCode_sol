@@ -19,9 +19,6 @@ public:
         return cnt;
     }
     int subarraysWithKDistinct(vector<int>& nums, int k) {
-        int a = solve(nums, k);
-        int b = solve(nums, k-1);
-        
-        return a-b;
+        return solve(nums, k) - solve(nums, k-1);
     }
 };
