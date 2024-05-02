@@ -1,15 +1,12 @@
 class Solution {
 public:
     int findMaxK(vector<int>& nums) {
-        int n = nums.size(); 
         int ans = -1;
-        for(int i = 0; i< n; i++){
-            if(nums[i] > ans){
-                for(int j =0; j<n; j++){
-                    if(nums[j] == -nums[i]) ans=abs(nums[i]);
-                }
-            }
+        unordered_set<int> mp(nums.begin(), nums.end());
+        
+        for(auto it: mp){
+            if(mp.find(-it) != mp.end()) ans = max(ans, it);
         }
-        return ans;
+    return ans;
     }
 };
