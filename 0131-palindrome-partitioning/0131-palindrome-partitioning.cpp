@@ -1,33 +1,33 @@
 class Solution {
 public:
-    bool checkPal(string &str, int start, int end){
-        while(start <= end){
-            if(str[start] != str[end]){
-                return false;
-            }
-            start++;
-            end--;
+    bool isPalindrome(int si, int ei, string s){
+        while(si < ei){
+            if(s[si] != s[ei]) return false;
+            si++;
+            ei--;
         }
         return true;
     }
-    void generatePalindrome(int idx, vector<string> &temp, vector<vector<string>> &result, string &s){
-        if(idx == s.size()){
-            result.push_back(temp);
+    void solve(int ind, string& s, vector<string>& ds, vector<vector<string>>& ans){
+        if(ind == s.length()){
+            ans.push_back(ds);
             return;
         }
         
-        for(int i = idx; i < s.size(); i++){
-            if(checkPal(s, idx, i)){
-                temp.push_back(s.substr(idx, i - idx + 1));
-                generatePalindrome(i + 1, temp, result, s);
-                temp.pop_back();
+        for(int i = ind; i<s.length(); i++){
+            if(isPalindrome(ind, i, s)){
+                ds.push_back(s.substr(ind, i-ind+1));
+                solve(i+1, s, ds, ans);
+                ds.pop_back();
             }
         }
+        
     }
     vector<vector<string>> partition(string s) {
-        vector<vector<string>> result;
-        vector<string> temp;
-        generatePalindrome(0, temp, result, s);
-        return result;
+        vector<vector<string>> ans;
+        vector<string> ds;
+        
+        solve(0, s, ds, ans);
+        return ans;
     }
 };
