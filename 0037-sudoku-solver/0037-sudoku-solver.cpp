@@ -17,7 +17,7 @@ public:
                         if(isPossible(i, j, ch, board)){
                             board[i][j] = ch;
                             if(solve(board) == true) return true;
-                            else board[i][j] = '.';
+                            board[i][j] = '.';
                         }
                     }
                 return false;
