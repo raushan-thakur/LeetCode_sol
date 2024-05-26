@@ -23,6 +23,17 @@ public:
         return rightN;
     }
     TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) {
-        return solve(root, p, q);
+        //return solve(root, p, q);
+        
+        while(root){
+            if(root->val > p->val && root->val > q->val){
+                root = root->left;
+            }else if(root->val < p->val && root->val < q->val){
+                root = root->right;
+            }else {
+                return root;
+            }
+        }
+        return root;
     }
 };
