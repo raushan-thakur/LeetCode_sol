@@ -1,4 +1,3 @@
-#include<bits/stdc++.h>
 class Solution {
 public:
     int findContentChildren(vector<int>& g, vector<int>& s) {
@@ -7,12 +6,14 @@ public:
         sort(s.begin(), s.end());
         
         int i =0, j=0;
-        while(i<g.size() && j< s.size()){
-            if(s[j]>= g[i]){
+        while( i<g.size() && j< s.size()){
+            if(g[i]<=s[j]){
                 i++;
                 j++;
-            }else
-                j++;
+            }else{
+                j++; 
+            }
+            cout<< i<<endl;
         }
         return i;
     }
