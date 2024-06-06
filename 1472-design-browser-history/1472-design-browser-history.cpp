@@ -1,44 +1,35 @@
-
 class BrowserHistory {
-class Node{
-    public:
-    string url;
-    Node* next;
-    Node* prev;
-        
-    Node(string url){
-        this->url = url;
-        this->next = NULL;
-        this->prev =NULL;
-    }
-};
+    class Node{
+        public:
+        string url;
+        Node* prev;
+        Node* next;
+    };
 public:
-    Node* head;
+    Node* curr;
     BrowserHistory(string homepage) {
-        head = new Node(homepage);
+        curr =new Node(homepage);
     }
     
     void visit(string url) {
         Node* temp = new Node(url);
-        head->next = temp;
-        temp->prev = head;
-        head = head->next;
+        curr->next = temp;
+        temp->prev = curr;
+        curr = temp;
     }
     
     string back(int steps) {
-        while(head->prev != NULL && steps>0){
-            head = head->prev;
-            steps--;
+        while(steps-- && curr->prev!= NULL){
+            curr=curr->prev;
         }
-        return head->url;
+        return curr->url;
     }
     
     string forward(int steps) {
-        while(head->next != NULL && steps>0){
-            head = head->next;
-            steps--;
+        while(steps-- && curr->next!= NULL){
+            curr=curr->next;
         }
-        return head->url;
+        return curr->url;
     }
 };
 
