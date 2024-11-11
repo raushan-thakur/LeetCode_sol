@@ -1,11 +1,11 @@
-class BrowserHistory {
-    class Node{
-        public:
-        string url;
-        Node* prev;
-        Node* next;
-    };
-public:
+class Node{
+    public:
+    string url;
+    Node* prev;
+    Node* next;
+};
+class BrowserHistory {  
+    public:
     Node* curr;
     BrowserHistory(string homepage) {
         curr =new Node(homepage);
